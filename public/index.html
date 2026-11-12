@@ -1,0 +1,543 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Bila Zora — Restaurant in Sveti Nikole, open 8AM to 12AM</title>
+<meta name="description" content="Bila Zora, a restaurant on Marshal Tito in Sveti Nikole. Open every day from 8AM until midnight. Rated 4.4 on Google."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""/>
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&amp;family=Nunito+Sans:wght@300;400;600;700&amp;display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --color-primary: #886F1D;
+    --color-secondary: #7D8A45;
+    --color-bg: #161B0C;
+    --color-surface: #222915;
+    --color-border: #5A5026;
+    --color-heading: #E9C875;
+    --color-body: #D5D3BE;
+    --font-display: "Marcellus", Georgia, serif;
+    --font-body: "Nunito Sans", system-ui, sans-serif;
+  }
+  html { scroll-behavior: smooth; background: var(--color-bg); }
+  body {
+    font-family: var(--font-body);
+    color: var(--color-body);
+    background: linear-gradient(180deg,
+      color-mix(in srgb, var(--color-secondary) 40%, var(--color-bg)) 0%,
+      color-mix(in srgb, var(--color-secondary) 14%, var(--color-bg)) 32%,
+      var(--color-bg) 62%,
+      color-mix(in srgb, var(--color-bg) 65%, #000) 100%);
+    overflow-x: hidden;
+  }
+  /* grain */
+  body::before {
+    content: ""; position: fixed; inset: 0; z-index: 1; pointer-events: none; opacity: .09; mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  main, footer { position: relative; z-index: 2; }
+  h1, h2, h3, .font-display { font-family: var(--font-display); font-weight: 400; color: var(--color-heading); }
+  ::selection { background: var(--color-heading); color: var(--color-bg); }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--color-heading); outline-offset: 3px; border-radius: 4px; }
+
+  /* concentric linework */
+  .rings {
+    position: absolute; inset: 0; pointer-events: none; overflow: hidden;
+  }
+  .rings::before {
+    content: ""; position: absolute; width: 1100px; height: 1100px; right: -420px; top: -420px; border-radius: 50%;
+    background: repeating-radial-gradient(circle, transparent 0 46px, color-mix(in srgb, var(--color-border) 55%, transparent) 46px 47px);
+    -webkit-mask-image: radial-gradient(circle, #000 30%, transparent 70%); mask-image: radial-gradient(circle, #000 30%, transparent 70%);
+  }
+  .rings.left::before { right: auto; left: -480px; top: auto; bottom: -460px; }
+  .rays {
+    position: absolute; inset: 0; pointer-events: none; opacity: .5;
+    background: repeating-conic-gradient(from 200deg at 85% 105%, color-mix(in srgb, var(--color-heading) 9%, transparent) 0 3deg, transparent 3deg 11deg);
+    -webkit-mask-image: linear-gradient(0deg, #000, transparent 75%); mask-image: linear-gradient(0deg, #000, transparent 75%);
+  }
+
+  /* nav */
+  #site-nav a.navlink { position: relative; font-size: .78rem; letter-spacing: .18em; text-transform: uppercase; color: var(--color-body); padding: .4rem 0; transition: color .2s; }
+  #site-nav a.navlink::after { content:""; position:absolute; left:0; right:0; bottom:0; height:1px; background: var(--color-heading); transform: scaleX(0); transform-origin: left; transition: transform .3s; }
+  #site-nav a.navlink:hover, #site-nav a.navlink:focus-visible { color: var(--color-heading); }
+  #site-nav a.navlink:hover::after, #site-nav a.navlink:focus-visible::after { transform: scaleX(1); }
+  #mobile-menu { background: var(--color-surface); border-top: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border); }
+  #mobile-menu a { display:block; padding: 1rem 1.5rem; font-family: var(--font-display); font-size: 1.35rem; color: var(--color-heading); border-bottom: 1px solid color-mix(in srgb, var(--color-border) 60%, transparent); }
+  #mobile-menu a:hover { background: color-mix(in srgb, var(--color-secondary) 18%, var(--color-surface)); }
+
+  /* buttons */
+  .btn-gold {
+    display: inline-flex; align-items: center; gap: .75rem; padding: .95rem 1.8rem; border-radius: 999px;
+    background: var(--color-heading); color: var(--color-bg); font-weight: 700; letter-spacing: .12em; text-transform: uppercase; font-size: .8rem;
+    box-shadow: 0 0 0 1px var(--color-heading), 0 0 0 6px color-mix(in srgb, var(--color-heading) 14%, transparent);
+    transition: transform .25s, box-shadow .25s;
+  }
+  .btn-gold:hover { transform: translateY(-2px); box-shadow: 0 0 0 1px var(--color-heading), 0 0 0 9px color-mix(in srgb, var(--color-heading) 22%, transparent); }
+  .btn-line {
+    display: inline-flex; align-items: center; gap: .6rem; padding: .95rem 1.6rem; border-radius: 999px;
+    border: 1px solid var(--color-border); color: var(--color-heading); font-weight: 600; letter-spacing: .12em; text-transform: uppercase; font-size: .8rem;
+    transition: background .25s, border-color .25s;
+  }
+  .btn-line:hover { background: color-mix(in srgb, var(--color-heading) 10%, transparent); border-color: var(--color-heading); }
+
+  /* hero */
+  .h1-line { display: block; }
+  .emph { color: var(--color-heading); position: relative; display: inline-block; }
+  .emph::after {
+    content:""; position:absolute; left:0; right:0; bottom:-.08em; height:.07em; border-radius: 2px;
+    background: linear-gradient(90deg, var(--color-primary), var(--color-heading) 50%, var(--color-primary));
+    transform-origin: left; animation: draw 1.2s .5s cubic-bezier(.2,.7,.2,1) both;
+  }
+  @keyframes draw { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  @keyframes glow { 0%,100% { opacity:.55; } 50% { opacity:1; } }
+  .dial-ticks { transform-origin: 200px 200px; animation: spin 240s linear infinite; }
+  .dawn-dot { animation: glow 4s ease-in-out infinite; }
+  .stat { padding: 0 1.25rem; border-left: 1px solid var(--color-border); }
+  .stat:first-child { padding-left: 0; border-left: 0; }
+  .stat b { display:block; font-family: var(--font-display); font-weight:400; color: var(--color-heading); font-size: clamp(1.7rem, 3.4vw, 2.5rem); line-height: 1; }
+  .stat span { display:block; margin-top:.5rem; font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; }
+
+  /* timeline rail */
+  #day-rail { position: fixed; left: 22px; top: 20vh; height: 60vh; width: 54px; z-index: 40; pointer-events: none; }
+  #day-rail .line { position:absolute; left: 6px; top:0; bottom:0; width:1px; background: color-mix(in srgb, var(--color-border) 80%, transparent); }
+  #day-rail .fill { position:absolute; left: 6px; top:0; width:1px; height:0; background: var(--color-heading); }
+  #day-rail .mark { position:absolute; left: 0; transform: translateY(-50%); display:flex; align-items:center; gap:.5rem; font-family: var(--font-display); font-size: .95rem; color: color-mix(in srgb, var(--color-body) 60%, transparent); transition: color .3s; }
+  #day-rail .mark i { display:block; width: 13px; height: 13px; border-radius: 50%; border: 1px solid var(--color-border); background: var(--color-bg); transition: all .3s; }
+  #day-rail .mark.on { color: var(--color-heading); }
+  #day-rail .mark.on i { border-color: var(--color-heading); background: var(--color-heading); box-shadow: 0 0 12px color-mix(in srgb, var(--color-heading) 60%, transparent); }
+  #day-rail .now { position:absolute; left: 2px; transform: translateY(-50%); width: 9px; height: 9px; border-radius:50%; background: var(--color-heading); box-shadow: 0 0 0 4px color-mix(in srgb, var(--color-heading) 20%, transparent); }
+  #day-rail .clock { position:absolute; left: 24px; transform: translateY(-50%); font-size: .68rem; letter-spacing: .12em; color: var(--color-heading); background: color-mix(in srgb, var(--color-bg) 80%, transparent); padding: 1px 6px; border-radius: 4px; }
+  @media (min-width: 1024px) { .railpad { padding-left: 5.5rem; } }
+  @media (min-width: 1280px) { .railpad { padding-left: 6.5rem; } }
+
+  .sec-title { font-size: clamp(2rem, 4.6vw, 3.6rem); line-height: 1.08; }
+  .kicker { font-size: .72rem; letter-spacing: .24em; text-transform: uppercase; color: var(--color-secondary); font-weight: 700; }
+  .meta { font-size: .72rem; letter-spacing: .16em; text-transform: uppercase; }
+
+  /* services: hour index */
+  #services-grid { border-bottom: 1px solid var(--color-border); }
+  .svc-row {
+    display: grid; grid-template-columns: auto 1fr; column-gap: 1.25rem; row-gap: .35rem; align-items: baseline;
+    padding: 1.75rem 0; border-top: 1px solid var(--color-border); transition: background .3s, padding .3s;
+  }
+  .svc-row::before { content: "08"; grid-row: span 3; font-family: var(--font-display); font-size: clamp(2.6rem, 7vw, 5rem); line-height: .9; color: color-mix(in srgb, var(--color-primary) 80%, var(--color-heading)); min-width: 1.6em; }
+  .svc-row:nth-child(4n+2)::before { content: "12"; }
+  .svc-row:nth-child(4n+3)::before { content: "18"; }
+  .svc-row:nth-child(4n+4)::before { content: "22"; }
+  .svc-row h3 { font-size: clamp(1.4rem, 2.6vw, 2rem); }
+  .svc-row p[data-field="description"] { max-width: 46ch; }
+  .svc-row p[data-field="price"] { font-size: .72rem; letter-spacing: .16em; text-transform: uppercase; color: var(--color-secondary); font-weight: 700; }
+  .svc-row [data-field="image-wrap"] { grid-column: 2; max-width: 220px; margin-top: .5rem; }
+  .svc-row [data-field="image-wrap"] img { width: 100%; border-radius: 10px; }
+  .svc-row:hover { background: linear-gradient(90deg, color-mix(in srgb, var(--color-secondary) 14%, transparent), transparent); padding-left: .75rem; }
+  @media (min-width: 768px) {
+    .svc-row { grid-template-columns: 7rem 1fr 14rem; }
+    .svc-row::before { grid-row: span 2; }
+    .svc-row h3 { grid-column: 2; }
+    .svc-row p[data-field="description"] { grid-column: 2; grid-row: 2; }
+    .svc-row p[data-field="price"] { grid-column: 3; grid-row: 1; text-align: right; }
+    .svc-row [data-field="image-wrap"] { grid-column: 3; grid-row: 2; justify-self: end; }
+  }
+
+  /* menu */
+  .menu-panel { background: color-mix(in srgb, var(--color-secondary) 16%, var(--color-surface)); border: 1px solid var(--color-border); border-radius: 28px; position: relative; overflow: hidden; }
+  #menu-categories { display: grid; gap: 3.5rem 4rem; }
+  @media (min-width: 900px) { #menu-categories { grid-template-columns: 1fr 1fr; } #menu-categories > .menu-cat:nth-child(even) { margin-top: 4rem; } }
+  .menu-cat::before { content: "Morning · 8 — 12"; display:block; margin-bottom:.5rem; font-size:.72rem; letter-spacing:.22em; text-transform:uppercase; color: var(--color-secondary); font-weight:700; }
+  .menu-cat:nth-child(4n+2)::before { content: "Afternoon · 12 — 18"; }
+  .menu-cat:nth-child(4n+3)::before { content: "Evening · 18 — 22"; }
+  .menu-cat:nth-child(4n+4)::before { content: "Late · 22 — 24"; }
+  .menu-cat h3 { font-size: clamp(1.8rem, 3.4vw, 2.6rem); padding-bottom: 1rem; margin-bottom: .5rem; border-bottom: 1px solid var(--color-border); }
+  .menu-item { display: grid; grid-template-columns: 1fr auto; column-gap: 1rem; padding: 1.05rem 0; border-bottom: 1px dotted color-mix(in srgb, var(--color-border) 90%, transparent); }
+  .menu-item [data-field="title"] { font-family: var(--font-display); font-size: 1.2rem; color: var(--color-heading); }
+  .menu-item [data-field="price"] { font-size: .78rem; letter-spacing: .14em; color: var(--color-heading); align-self: center; text-transform: uppercase; }
+  .menu-item [data-field="description"] { grid-column: 1; font-size: .92rem; margin-top: .15rem; }
+  .menu-item [data-field="image-wrap"] { grid-column: 1 / -1; max-width: 96px; margin-top: .6rem; }
+  .menu-item [data-field="image-wrap"] img { width: 100%; border-radius: 8px; }
+  .menu-item > span { display: block; }
+
+  /* reviews */
+  #reviews-grid { display: grid; gap: 0; }
+  @media (min-width: 800px) { #reviews-grid { grid-template-columns: 1fr 1fr; column-gap: 4rem; } #reviews-grid > .rev:first-child { grid-column: 1 / -1; } }
+  .rev { padding: 2rem 0; border-top: 1px solid var(--color-border); }
+  .rev [data-field="rating"] { color: var(--color-heading); letter-spacing: .3em; font-size: .8rem; }
+  .rev [data-field="text"] { font-family: var(--font-display); color: var(--color-heading); font-size: clamp(1.3rem, 2.4vw, 1.8rem); line-height: 1.3; margin: .9rem 0 1rem; max-width: 34ch; }
+  .rev:first-child [data-field="text"] { font-size: clamp(1.7rem, 3.6vw, 2.9rem); max-width: 26ch; }
+  .rev [data-field="author"] { font-size: .72rem; letter-spacing: .18em; text-transform: uppercase; color: var(--color-secondary); font-weight: 700; }
+
+  /* gallery */
+  #gallery-grid { display: grid; grid-template-columns: repeat(2, 1fr); grid-auto-rows: 140px; gap: 14px; grid-auto-flow: dense; }
+  @media (min-width: 768px) { #gallery-grid { grid-template-columns: repeat(6, 1fr); grid-auto-rows: 120px; gap: 18px; } }
+  .g-tile {
+    position: relative; overflow: hidden; border-radius: 120px 120px 14px 14px; grid-row: span 2;
+    background:
+      repeating-radial-gradient(circle at 50% 100%, transparent 0 22px, color-mix(in srgb, var(--color-border) 70%, transparent) 22px 23px),
+      linear-gradient(160deg, color-mix(in srgb, var(--color-secondary) 30%, var(--color-surface)), var(--color-surface));
+    border: 1px solid var(--color-border); transition: transform .4s, border-color .3s;
+  }
+  .g-tile img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+  .g-tile:hover { transform: translateY(-4px); border-color: var(--color-heading); }
+  .g-tile .ph { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:.5rem; color: var(--color-heading); font-size: .68rem; letter-spacing: .18em; text-transform: uppercase; opacity:.85; }
+  @media (min-width: 768px) {
+    .g-tile { grid-column: span 2; }
+    .g-tile:nth-child(5n+1) { grid-column: span 3; grid-row: span 4; border-radius: 300px 300px 18px 18px; }
+    .g-tile:nth-child(5n+2) { grid-column: span 3; grid-row: span 2; border-radius: 14px 100px 14px 14px; }
+    .g-tile:nth-child(5n+3) { grid-column: span 3; grid-row: span 2; border-radius: 14px 14px 100px 14px; }
+    .g-tile:nth-child(5n+4) { grid-column: span 2; grid-row: span 3; }
+    .g-tile:nth-child(5n+5) { grid-column: span 4; grid-row: span 3; border-radius: 14px; }
+  }
+
+  /* location */
+  .hours-row { display:flex; justify-content:space-between; gap:1rem; padding: .7rem 0; border-bottom: 1px solid color-mix(in srgb, var(--color-border) 70%, transparent); font-size: .95rem; }
+  .hours-row .d { letter-spacing: .14em; text-transform: uppercase; font-size: .75rem; font-weight: 700; color: var(--color-secondary); align-self: center; }
+  .hours-row span[id$="-value"] { font-family: var(--font-display); color: var(--color-heading); font-size: 1.1rem; }
+  .map-box { position: relative; min-height: 340px; border-radius: 28px; overflow: hidden; border: 1px solid var(--color-border);
+    background: linear-gradient(160deg, color-mix(in srgb, var(--color-secondary) 24%, var(--color-surface)), var(--color-surface)); }
+  .map-box iframe { position:absolute; inset:0; width:100%; height:100%; border:0; }
+  .addr-link { color: var(--color-heading); background-image: linear-gradient(var(--color-heading), var(--color-heading)); background-size: 0 1px; background-repeat: no-repeat; background-position: 0 100%; transition: background-size .4s; }
+  .addr-link:hover { background-size: 100% 1px; }
+  .contact a { color: var(--color-body); border-bottom: 1px solid var(--color-border); transition: color .2s, border-color .2s; }
+  .contact a:hover { color: var(--color-heading); border-color: var(--color-heading); }
+
+  /* socials */
+  .social-row a { width: 34px; height: 34px; align-items: center; justify-content: center; border: 1px solid var(--color-border); border-radius: 50%; color: var(--color-body); transition: color .2s, border-color .2s; }
+  .social-row a:hover { color: var(--color-heading); border-color: var(--color-heading); }
+  .social-row a svg, .social-row a img { width: 16px; height: 16px; fill: currentColor; }
+
+  /* reveal */
+  html.js .rv { opacity: 0; transform: translateY(22px); transition: opacity .9s ease, transform .9s ease; }
+  html.js .rv.in { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .dial-ticks, .dawn-dot, .emph::after { animation: none; }
+    html.js .rv { opacity: 1; transform: none; transition: none; }
+  }
+</style>
+
+
+
+<meta name="generator" content="consultprompts-static-site v1"/><link rel="stylesheet" href="/assets/css/styles.css"/></head>
+<body>
+
+<nav id="site-nav" class="fixed top-0 left-0 w-full z-50">
+  <div class="flex items-center justify-between px-5 md:px-10 py-4">
+    <a href="#" class="flex items-center gap-3">
+      <img id="site-logo" alt="logo.png" class="h-12 w-auto object-contain hidden"/>
+      <span id="logo-fallback-text" class="text-2xl font-bold tracking-tight text-[var(--site-heading)] hidden font-serif">Bila Zora</span>
+    </a>
+    <div class="hidden lg:flex items-center gap-8">
+      <a class="navlink" href="#menu-section">Menu</a>
+      <a class="navlink" href="#services-section">Services</a>
+      <a class="navlink" href="#hours">Hours</a>
+      <a class="navlink" href="#reviews-section">Reviews</a>
+      <a class="navlink" href="#gallery-section">Gallery</a>
+      <a class="navlink" href="#location-section">Location</a>
+    </div>
+    <button id="menu-btn" class="lg:hidden w-11 h-11 flex items-center justify-center rounded-full border border-[var(--site-border)] text-[var(--site-heading)]" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+      <svg id="ico-open" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 8h16M4 16h16"></path></svg>
+      <svg id="ico-close" class="hidden" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 6l12 12M18 6L6 18"></path></svg>
+    </button>
+  </div>
+  <div id="mobile-menu" class="hidden lg:hidden">
+    <a href="#menu-section">Menu</a>
+    <a href="#services-section">Services</a>
+    <a href="#hours">Hours</a>
+    <a href="#reviews-section">Reviews</a>
+    <a href="#gallery-section">Gallery</a>
+    <a href="#location-section">Location</a>
+  </div>
+</nav>
+
+<!-- day-arc timeline -->
+<div id="day-rail" class="hidden lg:block" aria-hidden="true">
+  <div class="line"></div><div class="fill" id="rail-fill"></div>
+  <div class="mark on" style="top:0%"><i></i>8</div>
+  <div class="mark" style="top:25%"><i></i>12</div>
+  <div class="mark" style="top:62.5%"><i></i>18</div>
+  <div class="mark" style="top:100%"><i></i>24</div>
+  <div class="now" id="rail-now" style="top:0"></div>
+  <div class="clock" id="rail-clock" style="top:0;display:none"></div>
+</div>
+
+<main>
+<!-- HERO -->
+<header id="hero" class="relative overflow-hidden">
+  <img id="hero-bg-image" alt="" style="display:none" class="absolute inset-0 w-full h-full object-cover" data-cp-on-error="1"/>
+  <div id="hero-bg-overlay" style="display:none;background-color:color-mix(in srgb, #161B0C 85%, transparent)" class="absolute inset-0"></div>
+  <div class="relative z-10 railpad">
+    <div class="rings" aria-hidden="true"></div>
+    <div class="rays" aria-hidden="true"></div>
+    <div class="relative max-w-7xl mx-auto px-5 md:px-10 pt-32 md:pt-36 pb-16 md:pb-24 grid lg:grid-cols-[1.1fr_.9fr] gap-12 lg:gap-8 items-center min-h-[100svh]">
+      <div>
+        <p class="kicker mb-6">Sveti Nikole · Marshal Tito</p>
+        <h1 class="text-[clamp(2.5rem,6.4vw,5.6rem)] leading-[1.02] tracking-tight" style="color:var(--color-body)">
+          <span class="h1-line">Open from 8AM</span>
+          <span class="h1-line"><span class="emph">until midnight</span>,</span>
+          <span class="h1-line">every day</span>
+        </h1>
+        <p class="mt-8 max-w-md text-lg leading-relaxed">Breakfast, long lunches, dinner and late evenings, all at one address on Marshal Tito.</p>
+        <div class="mt-9 flex flex-wrap items-center gap-4">
+          <a href="#menu-section" class="btn-gold">See Menu <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a>
+          <a href="#hours" class="btn-line">Opening Hours</a>
+        </div>
+        <div class="mt-12 flex items-stretch max-w-lg">
+          <div class="stat"><b>4.4</b><span>Rating on Google</span></div>
+          <div class="stat"><b>8AM</b><span>We open</span></div>
+          <div class="stat"><b>12AM</b><span>We close</span></div>
+        </div>
+        <div class="social-row mt-8 flex gap-3">
+          <a id="social-hero-1" href="#" target="_blank" rel="noopener noreferrer" style="display:none"></a>
+          <a id="social-hero-2" href="#" target="_blank" rel="noopener noreferrer" style="display:none"></a>
+          <a id="social-hero-3" href="#" target="_blank" rel="noopener noreferrer" style="display:none"></a>
+        </div>
+      </div>
+
+      <div class="relative mx-auto w-full max-w-[300px] sm:max-w-[440px] lg:max-w-[520px]">
+        <svg viewBox="0 0 400 400" class="w-full h-auto overflow-visible" role="img" aria-label="Dial showing opening hours from 8AM to 12AM, with a 4.4 rating on Google at its centre">
+          <defs>
+            <radialGradient id="dialglow" cx="50%" cy="50%" r="50%">
+              <stop offset="0" style="stop-color:var(--color-secondary);stop-opacity:.35"></stop>
+              <stop offset="1" style="stop-color:var(--color-surface);stop-opacity:.9"></stop>
+            </radialGradient>
+          </defs>
+          <circle cx="200" cy="200" r="196" fill="none" stroke="var(--color-border)" stroke-width="1" opacity=".6"></circle>
+          <circle cx="200" cy="200" r="150" fill="none" stroke="var(--color-border)" stroke-width="10" opacity=".55"></circle>
+          <circle cx="200" cy="200" r="130" fill="url(#dialglow)" stroke="var(--color-border)" stroke-width="1"></circle>
+          <circle cx="200" cy="200" r="104" fill="none" stroke="var(--color-border)" stroke-width="1" stroke-dasharray="2 5" opacity=".8"></circle>
+          <g class="dial-ticks"><circle cx="200" cy="200" r="168" fill="none" stroke="var(--color-primary)" stroke-width="10" stroke-dasharray="1.5 42.6" opacity=".9"></circle></g>
+          <path d="M329.9 275 A150 150 0 1 1 200 50" fill="none" stroke="var(--color-heading)" stroke-width="6" stroke-linecap="round"></path>
+          <circle class="dawn-dot" cx="329.9" cy="275" r="11" fill="var(--color-heading)"></circle>
+          <circle cx="329.9" cy="275" r="20" fill="none" stroke="var(--color-heading)" stroke-width="1" opacity=".5"></circle>
+          <circle cx="200" cy="50" r="6" fill="var(--color-bg)" stroke="var(--color-heading)" stroke-width="2"></circle>
+          <g font-family="Marcellus, serif" font-size="17" fill="var(--color-heading)" text-anchor="middle" dominant-baseline="middle">
+            <text x="200" y="14">24</text>
+            <text x="388" y="200">6</text>
+            <text x="200" y="388">12</text>
+            <text x="12" y="200">18</text>
+            <text x="366" y="302" font-size="15">8</text>
+          </g>
+          <text x="200" y="208" text-anchor="middle" font-family="Marcellus, serif" font-size="86" fill="var(--color-heading)">4.4</text>
+          <text x="200" y="240" text-anchor="middle" font-family="Nunito Sans, sans-serif" font-size="11" letter-spacing="3" fill="var(--color-body)">ON GOOGLE</text>
+          <text x="200" y="266" text-anchor="middle" font-size="15" letter-spacing="3" fill="var(--color-heading)">★★★★☆</text>
+          <text x="200" y="296" text-anchor="middle" font-family="Nunito Sans, sans-serif" font-size="11" letter-spacing="2" fill="var(--color-secondary)" font-weight="700">8AM — 12AM</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- MENU -->
+<section id="menu-section" style="display:none" class="relative railpad py-20 md:py-28">
+  <div class="max-w-7xl mx-auto px-5 md:px-10">
+    <div class="menu-panel p-6 sm:p-10 md:p-16">
+      <div class="rings" aria-hidden="true"></div>
+      <div class="relative">
+        <div class="grid md:grid-cols-[1fr_auto] gap-6 items-end mb-14">
+          <div>
+            <p class="kicker mb-4">The menu, by the hour</p>
+            <h2 class="sec-title">From the first coffee<br/>to the last table</h2>
+          </div>
+          <p class="max-w-xs text-sm opacity-90">Dishes and prices are placeholders while the kitchen confirms the full menu.</p>
+        </div>
+        <div id="menu-categories">
+          <div class="menu-cat">
+            <h3>Morning</h3>
+            <div data-role="menu-category-items">
+              <div class="menu-item"><span data-field="title">Breakfast plate</span><span data-field="price">TBC</span><span data-field="description">Dish name and description to be confirmed.</span></div>
+              <div class="menu-item"><span data-field="title">Fresh pastries</span><span data-field="price">TBC</span><span data-field="description">Dish name and description to be confirmed.</span></div>
+              <div class="menu-item"><span data-field="title">Coffee &amp; tea</span><span data-field="price">TBC</span><span data-field="description">Selection to be confirmed.</span></div>
+            </div>
+          </div>
+          <div class="menu-cat">
+            <h3>Afternoon</h3>
+            <div data-role="menu-category-items">
+              <div class="menu-item"><span data-field="title">Lunch main</span><span data-field="price">TBC</span><span data-field="description">Dish name and description to be confirmed.</span></div>
+              <div class="menu-item"><span data-field="title">Seasonal salad</span><span data-field="price">TBC</span><span data-field="description">Dish name and description to be confirmed.</span></div>
+            </div>
+          </div>
+          <div class="menu-cat">
+            <h3>Evening</h3>
+            <div data-role="menu-category-items">
+              <div class="menu-item"><span data-field="title">Dinner main</span><span data-field="price">TBC</span><span data-field="description">Dish name and description to be confirmed.</span></div>
+              <div class="menu-item"><span data-field="title">Dessert of the day</span><span data-field="price">TBC</span><span data-field="description">Dish name and description to be confirmed.</span></div>
+              <div class="menu-item"><span data-field="title">Wine &amp; drinks</span><span data-field="price">TBC</span><span data-field="description">Selection to be confirmed.</span></div>
+            </div>
+          </div>
+          <div id="menu-category-template" style="display:none" class="menu-cat">
+            <h3 data-field="category-name">Category Name</h3>
+            <div data-role="menu-category-items">
+              <div data-role="menu-item-template" style="display:none" class="menu-item">
+                <span data-field="title">Item Name</span>
+                <span data-field="description">Description.</span>
+                <span data-field="price">$10</span>
+                <div data-field="image-wrap" style="display:none"><img data-field="image" alt=""/></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services-section" style="display:none" class="relative railpad py-20 md:py-28 overflow-hidden">
+  <div class="rings left" aria-hidden="true"></div>
+  <div class="relative max-w-6xl mx-auto px-5 md:px-10 grid lg:grid-cols-[.8fr_1.2fr] gap-12 lg:gap-20">
+    <div class="lg:sticky lg:top-32 self-start">
+      <p class="kicker mb-4">Ways to dine</p>
+      <h2 class="sec-title">One door,<br/>the whole day</h2>
+      <p class="mt-6 max-w-sm">Come for the light of the morning, a slow lunch, or the quiet hours after dark. The numbers mark the hour each begins.</p>
+    </div>
+    <div id="services-grid">
+      <div class="svc-row">
+        <h3>Breakfast &amp; coffee</h3>
+        <p data-field="description">Doors open at 8AM. A calm table, something warm, and the day arriving slowly.</p>
+        <p data-field="price">Details to be confirmed</p>
+      </div>
+      <div class="svc-row">
+        <h3>Dine-in lunch</h3>
+        <p data-field="description">Unhurried midday tables for families, friends and anyone passing through town.</p>
+        <p data-field="price">Details to be confirmed</p>
+      </div>
+      <div class="svc-row">
+        <h3>Evening dining</h3>
+        <p data-field="description">Dinner, celebrations and late conversation, with the kitchen open until midnight.</p>
+        <p data-field="price">Details to be confirmed</p>
+      </div>
+      <div id="service-card-template" style="display:none" class="svc-row">
+        <h3 data-field="title">Service Name</h3>
+        <p data-field="description">Short description.</p>
+        <p data-field="price">From $80</p>
+        <div data-field="image-wrap" style="display:none"><img data-field="image" alt=""/></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section id="reviews-section" style="display:none" class="relative railpad py-20 md:py-28">
+  <div class="max-w-6xl mx-auto px-5 md:px-10">
+    <div class="flex flex-wrap items-end justify-between gap-8 mb-12">
+      <div>
+        <p class="kicker mb-4">What guests say</p>
+        <h2 class="sec-title max-w-xl">Rated 4.4 on Google</h2>
+      </div>
+      <a href="https://www.google.com/maps/search/?api=1&amp;query=Bila+Zora+Sveti+Nikole" target="_blank" rel="noopener noreferrer" class="btn-line">Read reviews on Google</a>
+    </div>
+    <div id="reviews-grid">
+      <div class="rev">
+        <p data-field="rating">★★★★☆</p>
+        <p data-field="text">4.4 out of 5, as rated by guests on Google.</p>
+        <p data-field="author">Google rating</p>
+      </div>
+      <div class="rev">
+        <p data-field="rating">★★★★☆</p>
+        <p data-field="text">Mornings, long lunches and late evenings, in guests’ own words.</p>
+        <p data-field="author">Read the reviews on Google</p>
+      </div>
+      <div id="review-card-template" style="display:none" class="rev">
+        <p data-field="rating">★★★★★</p>
+        <p data-field="text">Review text here.</p>
+        <p data-field="author">Author Name</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery-section" style="display:none" class="relative railpad py-20 md:py-28 overflow-hidden">
+  <div class="max-w-7xl mx-auto px-5 md:px-10">
+    <div class="mb-12 max-w-xl">
+      <p class="kicker mb-4">Inside Bila Zora</p>
+      <h2 class="sec-title">Light on the table</h2>
+    </div>
+    <div id="gallery-grid">
+      <div class="g-tile"><div class="ph"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="5" width="18" height="14" rx="2"></rect><circle cx="9" cy="11" r="2"></circle><path d="M21 16l-5-5-8 8"></path></svg>Interior</div></div>
+      <div class="g-tile"><div class="ph"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="5" width="18" height="14" rx="2"></rect><circle cx="9" cy="11" r="2"></circle><path d="M21 16l-5-5-8 8"></path></svg>Dishes</div></div>
+      <div class="g-tile"><div class="ph"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="5" width="18" height="14" rx="2"></rect><circle cx="9" cy="11" r="2"></circle><path d="M21 16l-5-5-8 8"></path></svg>Table settings</div></div>
+      <div class="g-tile"><div class="ph"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="5" width="18" height="14" rx="2"></rect><circle cx="9" cy="11" r="2"></circle><path d="M21 16l-5-5-8 8"></path></svg>Morning light</div></div>
+      <div class="g-tile"><div class="ph"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="5" width="18" height="14" rx="2"></rect><circle cx="9" cy="11" r="2"></circle><path d="M21 16l-5-5-8 8"></path></svg>Evening</div></div>
+      <div id="gallery-item-template" style="display:none" class="g-tile">
+        <img data-field="image" alt=""/>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LOCATION -->
+<section id="location-section" class="relative railpad py-20 md:py-28 overflow-hidden">
+  <div class="rings" aria-hidden="true"></div>
+  <div class="relative max-w-7xl mx-auto px-5 md:px-10">
+    <p class="kicker mb-5">Find us</p>
+    <a id="location-address" href="https://www.google.com/maps/search/?api=1&amp;query=%D1%83%D0%BB.+%D0%9C%D0%B0%D1%80%D1%88%D0%B0%D0%BB+%D0%A2%D0%B8%D1%82%D0%BE+%D0%B1%D1%80.100%2C+Sveti+Nikole" target="_blank" rel="noopener noreferrer" class="addr-link font-display block text-[clamp(1.9rem,5.2vw,4.6rem)] leading-[1.08] max-w-5xl">ул. Маршал Тито бр.100, Ж 2220, Sveti Nikole, North Macedonia</a>
+
+    <div class="mt-14 grid lg:grid-cols-[1.25fr_.75fr] gap-8 items-start">
+      <div class="map-box">
+        <div id="location-map-placeholder" class="absolute inset-0 flex items-center justify-center" aria-label="Map placeholder">
+          <svg viewBox="0 0 400 300" class="w-full h-full" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+            <g fill="none" stroke="var(--color-border)" stroke-width="1">
+              <circle cx="200" cy="150" r="40"></circle><circle cx="200" cy="150" r="80"></circle><circle cx="200" cy="150" r="120"></circle><circle cx="200" cy="150" r="160"></circle><circle cx="200" cy="150" r="200"></circle>
+              <path d="M0 210 C100 170 150 230 260 160 S360 120 400 90" stroke="var(--color-primary)" stroke-width="3"></path>
+              <path d="M90 0 L140 300M0 80 L400 130M300 0 L250 300" opacity=".6"></path>
+            </g>
+            <circle cx="200" cy="140" r="9" fill="var(--color-heading)"></circle>
+            <path d="M200 112 a24 24 0 0 1 24 24 c0 18 -24 38 -24 38 s-24 -20 -24 -38 a24 24 0 0 1 24 -24z" fill="var(--color-heading)" transform="translate(0,-4)" opacity=".95"></path>
+            <circle cx="200" cy="132" r="8" fill="var(--color-bg)"></circle>
+          </svg>
+        </div>
+        <iframe id="location-map-embed" style="display:none" title="Map showing Bila Zora" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <a id="location-directions-btn" href="#" target="_blank" rel="noopener noreferrer" style="display:none" class="btn-gold absolute bottom-5 left-5">Get directions</a>
+      </div>
+
+      <div id="hours" class="scroll-mt-28 rounded-[28px] p-7 md:p-9 border border-[var(--site-border)]" style="background: color-mix(in srgb, var(--color-secondary) 14%, var(--color-surface))">
+        <h3 class="text-3xl mb-1">Opening hours</h3>
+        <p class="text-sm mb-5 opacity-90">Mon – Sun : 8AM – 12AM</p>
+        <div id="location-hours-monday" class="hours-row"><span class="d">Monday</span><span id="location-hours-monday-value">8AM – 12AM</span></div>
+        <div id="location-hours-tuesday" class="hours-row"><span class="d">Tuesday</span><span id="location-hours-tuesday-value">8AM – 12AM</span></div>
+        <div id="location-hours-wednesday" class="hours-row"><span class="d">Wednesday</span><span id="location-hours-wednesday-value">8AM – 12AM</span></div>
+        <div id="location-hours-thursday" class="hours-row"><span class="d">Thursday</span><span id="location-hours-thursday-value">8AM – 12AM</span></div>
+        <div id="location-hours-friday" class="hours-row"><span class="d">Friday</span><span id="location-hours-friday-value">8AM – 12AM</span></div>
+        <div id="location-hours-saturday" class="hours-row"><span class="d">Saturday</span><span id="location-hours-saturday-value">8AM – 12AM</span></div>
+        <div id="location-hours-sunday" class="hours-row"><span class="d">Sunday</span><span id="location-hours-sunday-value">8AM – 12AM</span></div>
+        <div class="contact mt-7 flex flex-col gap-2 text-sm">
+          <div><span class="meta" style="color:var(--color-secondary)">Phone</span>  <a id="location-phone" href="#">Phone number to be added</a></div>
+          <div><span class="meta" style="color:var(--color-secondary)">Email</span>  <a id="location-email" href="#">Email to be added</a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="relative railpad border-t border-[var(--site-border)]" style="background: color-mix(in srgb, var(--color-bg) 70%, #000)">
+  <div class="max-w-7xl mx-auto px-5 md:px-10 py-14 grid md:grid-cols-[1.2fr_1fr_1fr] gap-10">
+    <div>
+      <p class="font-display text-4xl">Bila Zora</p>
+      <p class="mt-3 text-sm max-w-xs">White dawn. A restaurant for every hour from eight to midnight.</p>
+      <div class="social-row mt-6 flex gap-3">
+        <a id="social-footer-1" href="#" target="_blank" rel="noopener noreferrer" style="display:none"></a>
+        <a id="social-footer-2" href="#" target="_blank" rel="noopener noreferrer" style="display:none"></a>
+        <a id="social-footer-3" href="#" target="_blank" rel="noopener noreferrer" style="display:none"></a>
+      </div>
+    </div>
+    <div>
+      <p class="kicker mb-3">Address</p>
+      <p class="text-sm leading-relaxed">ул. Маршал Тито бр.100, Ж 2220,<br/>Sveti Nikole, North Macedonia</p>
+    </div>
+    <div>
+      <p class="kicker mb-3">Hours</p>
+      <p class="text-sm leading-relaxed">Mon - Sun : 8AM - 12AM</p>
+    </div>
+  </div>
+  <div class="border-t border-[var(--site-border)]">
+    <div class="max-w-7xl mx-auto px-5 md:px-10 py-5 flex flex-wrap items-center justify-between gap-3 text-xs">
+      <span>© Bila Zora</span>
+      <a href="https://consultprompts.com" target="_blank" rel="noopener noreferrer" style="font-size:11px;opacity:0.4">Powered by ConsultPrompts</a>
+    </div>
+  </div>
+</footer>
+
+
+
+<script src="/assets/js/site.js" defer=""></script><script src="/assets/js/page-1.js" defer=""></script><script src="/assets/js/page-2.js" defer=""></script><script src="/assets/js/handlers.js" defer=""></script></body></html>
